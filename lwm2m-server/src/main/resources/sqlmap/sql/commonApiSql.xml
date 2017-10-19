@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dkitec.lwm2m.dao.CommonApiInfoDao" >
+	
+	<resultMap id="ApiResultMap" type="com.dkitec.argosiot.commonapi.domain.CommonApiInfo">
+		<result column="API_SERNO" jdbcType="INTEGER" property="serialNo" />
+		<result column="API_MAIN_MD" jdbcType="VARCHAR" property="mainModuleName" />
+		<result column="API_VER" jdbcType="VARCHAR" property="version" />
+		<result column="API_SUB_MD" jdbcType="VARCHAR" property="subModuleName" />
+		<result column="METHOD" jdbcType="VARCHAR" property="method" />
+		<result column="API_ATTC_YN" jdbcType="CHAR" property="apiAttcYn" />
+		<result column="API_CONT_JSON" jdbcType="VARCHAR" property="jsonContent" />
+	</resultMap>
+  	
+	<!-- INFRA AE 정보 확인 BY OID -->
+	<select id="selectCommonApi" parameterType="com.dkitec.argosiot.commonapi.domain.CommonApiInfo" resultMap="ApiResultMap">
+	SELECT A.API_SERNO, 
+			A.API_MAIN_MD, 
+			A.API_VER, 
+			A.API_SUB_MD, 
+			B.CD_NM AS METHOD, 
+			A.API_ATTC_YN, 
+			A.API_CONT_JSON
+	  FROM TBR_IOT_API A LEFT JOIN TBR_COM_CODE B ON B.CD_GRP_ID='023' AND A.API_TYPE_CD = B.CD_ID
+	 WHERE API_MAIN_MD = #{mainModuleName}
+	 	AND API_VER = #{version}
+	 	AND API_SUB_MD = #{subModuleName}
+	</select>
+	
+	
+</mapper>

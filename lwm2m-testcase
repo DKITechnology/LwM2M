@@ -1,0 +1,785 @@
+{
+  "front-version": "2.10.1",
+  "version": 3,
+  "nodes": [
+    {
+      "type": "Project",
+      "id": "62a078ae-2b68-4268-91cb-3acfeae6da93",
+      "lastModified": "2017-10-19T13:37:41.428+09:00",
+      "name": "lwm2m"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBodyEditorHeight": 240,
+        "textBody": "{\n\t\"resources\":[\n\t{\"rscId\":\"1\",\"rscType\":\"INTEGER\",\"rscValue\":1},\n\t{\"rscId\":\"2\",\"rscType\":\"INTEGER\",\"rscValue\":2},\n\t{\"rscId\":\"3\",\"rscType\":\"INTEGER\",\"rscValue\":33},\n\t{\"rscId\":\"5\",\"rscType\":\"INTEGER\",\"rscValue\":45},\n\t{\"rscId\":\"6\",\"rscType\":\"BOOLEAN\",\"rscValue\":true},\n\t{\"rscId\":\"7\",\"rscType\":\"STRING\",\"rscValue\":\"1230\"}\n\t]\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "10.112.58.231:9090",
+        "path": "/lwm2m/devices/wakaama/objects"
+      },
+      "id": "6313f6e0-8590-446b-99c3-c2203b10d7e0",
+      "lastModified": "2017-08-21T13:41:24.678+09:00",
+      "name": "Device objects 조회",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "enabled": true,
+          "name": "Authorization",
+          "value": "Basic YWRtaW4yOjRiMzJlOTlhZTU2MDY1YWNlODAzNDY1NzQ5NmM4OTQ1MTk4ZjIyMDkzOWY3OTliYTM0YmNjYWJiYjQ4OWIzYjQ6T0FN="
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "google-oauth2|110077062896859214786"
+      },
+      "parentId": "62a078ae-2b68-4268-91cb-3acfeae6da93"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBodyEditorHeight": 240,
+        "textBody": "{  \n  \"instanceId\" : 13,\n  \"resources\":[{\n    \"rscId\": 13, \"rscValue\": 300, \"rscType\": \"INTEGER\"\n  }]\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "10.112.58.231:9090",
+        "path": "/lwm2m/devices/0.2.481.1.1.lwm2m_model_1.01/requests/3303"
+      },
+      "id": "d3efdae7-a0b8-4c97-8d28-40f4761ad17a",
+      "lastModified": "2017-08-21T13:41:24.682+09:00",
+      "name": "Object Create",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "google-oauth2|110077062896859214786"
+      },
+      "parentId": "62a078ae-2b68-4268-91cb-3acfeae6da93"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBodyEditorHeight": 240,
+        "textBody": "{  \n  \"instanceId\" : 1,\n  \"resources\":[{\n    \"rscId\": 0, \"rscValue\": 1, \"rscType\": \"INTEGER\"\n  },\n              {\n    \"rscId\": 1, \"rscValue\": 1, \"rscType\": \"INTEGER\"\n  },\n               {\n    \"rscId\": 6, \"rscValue\": true, \"rscType\": \"BOOLEAN\"\n  }]\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "10.112.58.231:9090",
+        "path": "/lwm2m//requests/wakaama/1"
+      },
+      "id": "b3bfa05f-4549-45e4-8c37-99796ec2bffa",
+      "lastModified": "2017-08-21T13:41:24.682+09:00",
+      "name": "Object Create_WAKAAMA",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "enabled": true,
+          "name": "Authorization",
+          "value": "Basic YWRtaW4yOjRiMzJlOTlhZTU2MDY1YWNlODAzNDY1NzQ5NmM4OTQ1MTk4ZjIyMDkzOWY3OTliYTM0YmNjYWJiYjQ4OWIzYjQ6T0FN="
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "google-oauth2|110077062896859214786"
+      },
+      "parentId": "62a078ae-2b68-4268-91cb-3acfeae6da93"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBodyEditorHeight": 240,
+        "textBody": "{  \n  \"instanceId\":3,\n  \"resources\":[{\n    \"rscId\": 1, \"rscValue\": 1, \"rscType\": \"INTEGER\"\n  }]\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "10.112.58.231:9090",
+        "path": "/lwm2m//requests/wakaama/1024"
+      },
+      "id": "196b6367-462c-4e9c-b24f-eecc9302c337",
+      "lastModified": "2017-08-21T13:41:24.677+09:00",
+      "name": "Object Create_WAKAAMA_1024",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "enabled": true,
+          "name": "Authorization",
+          "value": "Basic YWRtaW4yOjRiMzJlOTlhZTU2MDY1YWNlODAzNDY1NzQ5NmM4OTQ1MTk4ZjIyMDkzOWY3OTliYTM0YmNjYWJiYjQ4OWIzYjQ6T0FN="
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "google-oauth2|110077062896859214786"
+      },
+      "parentId": "62a078ae-2b68-4268-91cb-3acfeae6da93"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBodyEditorHeight": 240,
+        "textBody": "{ \n  \"subUrl\":\"http://127.0.0.1:8080\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "reqType",
+              "value": "observe"
+            },
+            {
+              "enabled": true,
+              "name": "fromat",
+              "value": "tlv"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "10.112.58.231:9090",
+        "path": "/lwm2m/requests/wakaama/3/0/1"
+      },
+      "id": "2d683b81-8e6a-49e1-86d2-1c29be69a865",
+      "lastModified": "2017-08-21T13:41:24.678+09:00",
+      "name": "Object Observe",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "enabled": true,
+          "name": "Authorization",
+          "value": "Basic YWRtaW4yOjRiMzJlOTlhZTU2MDY1YWNlODAzNDY1NzQ5NmM4OTQ1MTk4ZjIyMDkzOWY3OTliYTM0YmNjYWJiYjQ4OWIzYjQ6T0FN="
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "google-oauth2|110077062896859214786"
+      },
+      "parentId": "62a078ae-2b68-4268-91cb-3acfeae6da93"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.4",
+        "name": "PUT"
+      },
+      "body": {
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBodyEditorHeight": 240,
+        "textBody": "{ \n\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "reqType",
+              "value": "observe"
+            },
+            {
+              "enabled": true,
+              "name": "fromat",
+              "value": "tlv"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "10.112.58.231:9090",
+        "path": "/lwm2m/requests/wakaama/3/0/1"
+      },
+      "id": "aa85330b-ace2-4fa1-bbff-f311f85f5c53",
+      "lastModified": "2017-08-21T13:41:24.680+09:00",
+      "name": "Object observe Cancel",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "enabled": true,
+          "name": "Authorization",
+          "value": "Basic YWRtaW4yOjRiMzJlOTlhZTU2MDY1YWNlODAzNDY1NzQ5NmM4OTQ1MTk4ZjIyMDkzOWY3OTliYTM0YmNjYWJiYjQ4OWIzYjQ6T0FN="
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "google-oauth2|110077062896859214786"
+      },
+      "parentId": "62a078ae-2b68-4268-91cb-3acfeae6da93"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBodyEditorHeight": 240,
+        "textBody": "{ \n \n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "format",
+              "value": "TEXT"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:8080",
+        "path": "/lwm2m/requests/test/3/0/1"
+      },
+      "id": "15b8cf24-d2cd-4c1f-a0e9-15a346566a88",
+      "lastModified": "2017-08-21T13:41:24.677+09:00",
+      "name": "Resource Read",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "enabled": true,
+          "name": "Authorization",
+          "value": "Basic YWRtaW4yOjRiMzJlOTlhZTU2MDY1YWNlODAzNDY1NzQ5NmM4OTQ1MTk4ZjIyMDkzOWY3OTliYTM0YmNjYWJiYjQ4OWIzYjQ6T0FN="
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "google-oauth2|110077062896859214786"
+      },
+      "parentId": "62a078ae-2b68-4268-91cb-3acfeae6da93"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.4",
+        "name": "PUT"
+      },
+      "body": {
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBodyEditorHeight": 240,
+        "textBody": "{\n    \"rscValue\": \"101\", \"rscType\": \"STRING\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:8080",
+        "path": "/lwm2m/requests/test/3/0/14"
+      },
+      "id": "666e28d2-7454-4ed8-8f0f-eb17d94bef34",
+      "lastModified": "2017-08-21T13:41:24.678+09:00",
+      "name": "Resource Write",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "enabled": true,
+          "name": "Authorization",
+          "value": "Basic YWRtaW4yOjRiMzJlOTlhZTU2MDY1YWNlODAzNDY1NzQ5NmM4OTQ1MTk4ZjIyMDkzOWY3OTliYTM0YmNjYWJiYjQ4OWIzYjQ6T0FN="
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "google-oauth2|110077062896859214786"
+      },
+      "parentId": "62a078ae-2b68-4268-91cb-3acfeae6da93"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.4",
+        "name": "PUT"
+      },
+      "body": {
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBodyEditorHeight": 240,
+        "textBody": "{\n    \"rscValue\": \"20170622112023\", \"rscType\": \"TIME\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:8080",
+        "path": "/lwm2m/requests/test/3/0/13"
+      },
+      "id": "8310362c-cd11-4987-bbbb-879cb3ac9ec7",
+      "lastModified": "2017-08-21T13:41:24.679+09:00",
+      "name": "Resource Write-date",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "enabled": true,
+          "name": "Authorization",
+          "value": "Basic YWRtaW4yOjRiMzJlOTlhZTU2MDY1YWNlODAzNDY1NzQ5NmM4OTQ1MTk4ZjIyMDkzOWY3OTliYTM0YmNjYWJiYjQ4OWIzYjQ6T0FN="
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "google-oauth2|110077062896859214786"
+      },
+      "parentId": "62a078ae-2b68-4268-91cb-3acfeae6da93"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.4",
+        "name": "PUT"
+      },
+      "body": {
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBodyEditorHeight": 240,
+        "textBody": "{  \n  \"deviceId\": \"0.2.481.1.1.lwm2m_model_1.01\",\n  \"securityType\" : \"001\",\n  \"key\": 12\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "10.112.58.231",
+        "path": "/lwm2m/securitys"
+      },
+      "id": "218f1f87-01ae-4c4b-9925-3089980f5616",
+      "lastModified": "2017-08-21T13:41:24.677+09:00",
+      "name": "Security 등록",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "google-oauth2|110077062896859214786"
+      },
+      "parentId": "62a078ae-2b68-4268-91cb-3acfeae6da93"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBodyEditorHeight": 240,
+        "textBody": "{  \n  \"resources\":[{\n    \"rscId\": 14, \"rscValue\": \"1\", \"rscType\": \"STRING\"\n  }]\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:8080",
+        "path": "/lwm2m/devices/0.2.1/requests/3/0"
+      },
+      "id": "d9ad34b2-432b-42cc-9517-4f80cffeb754",
+      "lastModified": "2017-08-21T13:41:24.682+09:00",
+      "name": "object Read",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "google-oauth2|110077062896859214786"
+      },
+      "parentId": "62a078ae-2b68-4268-91cb-3acfeae6da93"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.4",
+        "name": "PUT"
+      },
+      "body": {
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBodyEditorHeight": 240,
+        "textBody": "{  \n  \"resources\":[{\n    \"rscId\": 14, \"rscValue\": \"1\", \"rscType\": \"STRING\"\n  }]\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:8080",
+        "path": "/lwm2m/devices/0.2.481.1.1.lwm2m_model_1.01/requests/3/0"
+      },
+      "id": "3fd495f5-8a4e-482c-b1ad-a083425902f0",
+      "lastModified": "2017-08-21T13:41:24.678+09:00",
+      "name": "object Write",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "google-oauth2|110077062896859214786"
+      },
+      "parentId": "62a078ae-2b68-4268-91cb-3acfeae6da93"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.4",
+        "name": "PUT"
+      },
+      "body": {
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBodyEditorHeight": 240,
+        "textBody": "{  \n  \"resources\":[\n    {\n    \"rscId\": 14, \"rscValue\": \"1\", \"rscType\": \"STRING\"\n  },\n               {\n    \"rscId\": 13, \"rscValue\": \"20170615112021\", \"rscType\": \"TIME\"\n  }]\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:8080",
+        "path": "/lwm2m/devices/0.2.481.1.1.lwm2m_model_1.01/requests/3/0"
+      },
+      "id": "649b5d14-ebc8-4de9-94de-b72a5e99a739",
+      "lastModified": "2017-10-19T13:35:49.166+09:00",
+      "name": "object Write2",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "google-oauth2|110077062896859214786"
+      },
+      "parentId": "62a078ae-2b68-4268-91cb-3acfeae6da93"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBodyEditorHeight": 240,
+        "textBody": "{ \n  \"subUrl\":\"http://127.0.0.1:8080\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "10.112.58.231:9090",
+        "path": "/lwm2m/devices/test/objects"
+      },
+      "id": "d57e69f5-0159-40a8-829c-769dbc718726",
+      "lastModified": "2017-08-21T13:41:24.682+09:00",
+      "name": "object 조회",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "google-oauth2|110077062896859214786"
+      },
+      "parentId": "62a078ae-2b68-4268-91cb-3acfeae6da93"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
+        "name": "DELETE"
+      },
+      "body": {
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBodyEditorHeight": 240,
+        "textBody": "{\n\"reqType\": \"001\",\n\"reqDesc\": \"펌웨어\",\n\"fiwrId\": \"1\",\n\"procCd\": \"1\",\n\"reqDatmStr\": \"201706211401\",\n  \"deviceIds\": [ \"123\", \"0.2.10\", \"0.2.1\", \"0.2.481.1.1.lwm2m_model_1.01\" ]\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:8080",
+        "path": "/lwm2m/firmwares/upgrades/18"
+      },
+      "id": "a5cff3c6-95ec-4d49-9e5e-a1b93627efda",
+      "lastModified": "2017-08-21T13:41:24.679+09:00",
+      "name": "펌웨어 정보 삭제",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "google-oauth2|110077062896859214786"
+      },
+      "parentId": "62a078ae-2b68-4268-91cb-3acfeae6da93"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBodyEditorHeight": 240,
+        "textBody": "{\n\"reqType\": \"001\",\n\"reqDesc\": \"펌웨어\",\n\"fiwrId\": \"1\",\n\"procCd\": \"1\",\n\"reqDatmStr\": \"201706201848\",\n  \"deviceIds\": [ \"123\", \"0.2.10\", \"0.2.1\", \"0.2.481.1.1.lwm2m_model_1.01\" ]\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:8080",
+        "path": "/lwm2m/firmwares/upgrades"
+      },
+      "id": "5cb968d1-ca33-4ad1-84fa-b0ef050a0cfb",
+      "lastModified": "2017-08-21T13:41:24.678+09:00",
+      "name": "펌웨어 정보 저장",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "google-oauth2|110077062896859214786"
+      },
+      "parentId": "62a078ae-2b68-4268-91cb-3acfeae6da93"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBodyEditorHeight": 240,
+        "textBody": "{\n\"reqType\": \"001\",\n\"reqDesc\": \"test\",\n\"infraAeId\": null,\n\"userId\": null,\n\"fiwrId\": null,\n\"reqDatm\": 201706132353,\n\"procCd\": \"0\",\n\"deviceIds\": null,\n\"reqResults\": null\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "reqStartDate",
+              "value": "20170613"
+            },
+            {
+              "enabled": true,
+              "name": "reqEndDate",
+              "value": "20170620"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:8080",
+        "path": "/lwm2m/firmwares/upgrades"
+      },
+      "id": "75275490-b9e0-4d32-b63f-eda807b76688",
+      "lastModified": "2017-08-21T13:41:24.679+09:00",
+      "name": "펌웨어 정보 조회",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {
+        "ownerId": "google-oauth2|110077062896859214786"
+      },
+      "parentId": "62a078ae-2b68-4268-91cb-3acfeae6da93"
+    }
+  ]
+}

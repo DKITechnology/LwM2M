@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:p="http://www.springframework.org/schema/p"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:mvc="http://www.springframework.org/schema/mvc"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:util="http://www.springframework.org/schema/util"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+				http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+				http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+				http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.1.xsd">
+	
+    <bean id="activitiDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" >
+        <property name="driverClassName" value="${jdbc.activity.driverClass}"/>
+        <property name="url" value="${jdbc.activity.url}"/>
+        <property name="username" value="${jdbc.activity.username}"/>
+        <property name="password" value="${jdbc.activity.password}"/> 
+        <property name="maxIdle" value="${jdbc.activity.maxIdle}" />
+        <property name="validationQuery" value="${jdbc.activity.validationQuery}" />
+        <property name="testOnBorrow" value="${jdbc.activity.testOnBorrow}" />
+        <property name="testWhileIdle" value="${jdbc.activity.testWhileIdle}" />
+        <property name="maxOpenPreparedStatements" value="${jdbc.activity.maxOpenPreparedStatements}" />
+        <property name="poolPreparedStatements" value="${jdbc.activity.poolPreparedStatements}" />
+    </bean>
+	
+	<bean id="activitiTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" p:dataSource-ref="activitiDataSource" />
+	
+	<bean id="asyncExecutor" class="org.activiti.engine.impl.asyncexecutor.DefaultAsyncJobExecutor">
+	    <property name="corePoolSize" value="100" />
+	    <property name="maxPoolSize" value="500" />
+	    <property name="keepAliveTime" value="3000" />
+	    <property name="queueSize" value="500" />
+	    <property name="maxTimerJobsPerAcquisition" value="10" />
+	    <property name="maxAsyncJobsDuePerAcquisition" value="10" />
+	    <property name="defaultAsyncJobAcquireWaitTimeInMillis" value="1000" />
+	    <property name="defaultTimerJobAcquireWaitTimeInMillis" value="1000" />
+	    <property name="timerLockTimeInMillis" value="60000" />
+	    <property name="asyncJobLockTimeInMillis" value="60000" />
+	</bean>
+		
+	<bean id="processEngineConfiguration" class="org.activiti.spring.SpringProcessEngineConfiguration">
+		<property name="dataSource" ref="activitiDataSource" />
+		<property name="databaseSchemaUpdate" value="true"/>
+
+		<!-- JobExecutor is a component that manages a couple of threads to fire timers -->
+		<property name="jobExecutorActivate" value="false" />		
+	    <property name="asyncExecutorEnabled" value="true" />
+	    <property name="asyncExecutorActivate" value="true" />
+	    
+	    <!-- property name="mailServerHost" value="${mail.host}" />
+	    <property name="mailServerPort" value="${mail.port}" />
+	    <property name="mailServerUsername" value="${mail.username}" />
+	    <property name="mailServerPassword" value="${mail.password}" />
+	    <property name="mailServerUseSSL" value="true" />	   
+	    <property name="mailServerUseTLS" value="true" /> -->	  	 
+	       	    
+	    <property name="deploymentResources" value="classpath*:/bpmn/*.bpmn" />
+  		<property name="deploymentMode" value="single-resource" />
+  		<property name="transactionManager" ref="activitiTransactionManager" />
+  		<property name="history" value="none" />  		
+  		<property name="asyncExecutor" ref="asyncExecutor" />  			    
+	</bean>
+	
+	
+	<bean id="processEngine" class="org.activiti.spring.ProcessEngineFactoryBean">
+        <property name="processEngineConfiguration" ref="processEngineConfiguration"/>
+    </bean>
+
+    <bean id="repositoryService" factory-bean="processEngine" factory-method="getRepositoryService"/>
+    <bean id="runtimeService" factory-bean="processEngine" factory-method="getRuntimeService"/>
+    <bean id="taskService" factory-bean="processEngine" factory-method="getTaskService"/>
+    <bean id="historyService" factory-bean="processEngine" factory-method="getHistoryService"/>
+    <bean id="managementService" factory-bean="processEngine" factory-method="getManagementService"/>
+    
+    <!-- <bean id="applicationContextProvider" class="com.dkitec.argosiot.common.util.ApplicationContextProvider"></bean> -->
+    
+</beans>
