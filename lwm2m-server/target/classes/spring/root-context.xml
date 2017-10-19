@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+					    http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+					    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+	
+	<!--config -->
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:config/jdbc.properties</value>
+				<value>classpath:config/serverconfig.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	<import resource="interceptor-context.xml" />
+	<import resource="mongoredis-context.xml"/>	
+	<import resource="mybatis-context.xml"/>
+	<import resource="activiti-context.xml" />	
+		
+	<bean id="commonRedis" class="com.dkitec.lwm2m.rdao.common.CommonRedisPoolDAO">
+		<constructor-arg ref="jedisPool"/>
+	</bean>
+	
+	<bean id="messageTracer" class="com.dkitec.lwm2m.server.message.MessageTracer">
+		<constructor-arg ref="commonRedis"/>
+	</bean>
+	
+	<bean id="serverInit" class="com.dkitec.lwm2m.service.ServerInitServiceImpl"/>
+	
+	<bean id="leshanServer" class="com.dkitec.lwm2m.server.DefaultLwm2mServer" init-method="statrLeshanServer">		
+		<property name="jedisPool" ref="jedisPool"/>
+		<property name="clusterInstanceId" value="${lwm2m.server.clusterInstanceId}"/>
+   		<property name="serverAddress" value="${lwm2m.server.address}"/>
+		<property name="secureAddress" value="${lwm2m.server.secureAddress}"/>  
+		<property name="coapServerPort" value="${lwm2m.server.coapPort}"/>
+		<property name="secureCaopServerPort" value="${lwm2m.server.secureCaopPort}"/>		
+		<!-- <property name="keyStorePath" value=""/>
+		<property name="keyStoreType" value=""/>
+		<property name="keyStorePass" value=""/>
+		<property name="keyStoreAlias" value=""/>
+		<property name="keyStoreAliasPass" value=""/> -->
+		<!-- modelpath는 resouce가 아닌 RDB 정보로 변경 -->
+		<!-- <property name="modelPaths" value="3303.xml"/> -->
+		<property name="messageTracer" ref="messageTracer"/>
+		<property name="serverInitService" ref="serverInit"/>
+	</bean>
+		
+</beans>

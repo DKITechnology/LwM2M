@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dkitec.lwm2m.dao.ServerInitDao" >
+
+	<insert id="insertDefaultModelInfo">
+		INSERT INTO tbd_iot_device_modl_cd
+		(DEVC_MODL_CD, MANUF_NM, DEVC_MODL_NM, DEVC_TYPE_CD, DEVC_OPEN_YN, CRE_DATM)
+		VALUES
+		('lwm2m', 'dki', 'lwm2m', '002', 'Y' ,NOW()) 
+		ON DUPLICATE KEY UPDATE
+		MDF_DATM = NOW()
+	</insert>
+	
+	<select id="selectAdditionObjects" resultType="com.dkitec.lwm2m.domain.ObjectModelInfoVO">
+		select OBJ_ID as objId, OBJ_NM as objNm, OBJ_CONT as objCont from
+		tbr_lwm2m_object
+	</select>
+	
+</mapper>

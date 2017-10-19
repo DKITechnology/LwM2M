@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 30초마다 설정 파일의 변경을 확인한다. 파일이 변경되면 다시 로딩한다 -->
+<configuration debug="true" scan="true" scanPeriod="30 seconds">
+    
+    <property name="LOG_LEVEL" value="info" />
+    
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>[LWM2M Server]%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36}.%M\(%line\) - %msg%n%ex</Pattern>
+        </layout>     
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <prudent>true</prudent>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina.base}/logs/Argos/argosPlatform_%d{yyyyMMdd}.log</fileNamePattern>
+             <!-- 30일이 지난 파일은 삭제가 된다.-->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>[LWM2M Server]%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36}.%M\(%line\) - %msg%n%ex</pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="FILE-ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <queueSize>10000</queueSize>
+        <includeCallerData>true</includeCallerData>
+        <appender-ref ref="FILE" />
+    </appender>
+    
+    <appender name="CONSOLE-ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <queueSize>10000</queueSize>
+        <includeCallerData>true</includeCallerData>
+        <appender-ref ref="CONSOLE" />
+    </appender>    
+    
+	<logger name="org.springframework" level="INFO" />
+	<logger name="org.activiti" level="INFO" />
+	<logger name="org.apache" level="INFO" />
+	<logger name="org.eclipse.leshan" level="INFO" additivity="false" />
+	
+    <root>
+        <level value="${LOG_LEVEL}" />
+        <appender-ref ref="CONSOLE-ASYNC" />
+        <!-- <appender-ref ref="FILE-ASYNC" /> -->
+    </root>
+</configuration>

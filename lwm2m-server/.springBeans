@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beansProjectDescription>
+	<version>1</version>
+	<pluginVersion><![CDATA[3.8.4.201703310634-RELEASE]]></pluginVersion>
+	<configSuffixes>
+		<configSuffix><![CDATA[xml]]></configSuffix>
+	</configSuffixes>
+	<enableImports><![CDATA[true]]></enableImports>
+	<configs>
+	</configs>
+	<autoconfigs>
+		<config>src/main/resources/spring/appServlet/servlet-context.xml</config>
+		<config>src/main/resources/spring/interceptor-context.xml</config>
+		<config>src/main/resources/spring/activiti-context.xml</config>
+		<config>src/main/resources/spring/mongoredis-context.xml</config>
+		<config>src/main/resources/spring/mybatis-context.xml</config>
+		<config>src/main/resources/spring/root-context.xml</config>
+	</autoconfigs>
+	<configSets>
+	</configSets>
+</beansProjectDescription>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dkitec.lwm2m.dao.AuthInfoDao" >
+	
+	<!-- 관리자 인증 정보 확인 --> 
+	<select id="">
+	
+	</select>
+	  	
+	<!-- INFRA AE 인증 정보 확인 -->
+	<select id="selectInfAEAuth" parameterType="String" resultType="com.dkitec.lwm2m.domain.AuthInfo">
+		select INFRA_AE_ID as authId, BASE_ACCESS_TOKEN as authPwd
+		from tbr_iot_infra_ae
+		WHERE INFRA_AE_ID = #{authId}
+	</select>
+	
+	<select id="selectAdminAuth" parameterType="String" resultType="com.dkitec.lwm2m.domain.AuthInfo">
+		select USER_ID as authId, USER_PROP_VALUE as authPwd from tbr_iot_user_prop
+		where USER_ID = #{authId} AND USER_PROP_NM = 'SESSION_KEY'
+	</select>
+	
+</mapper>
