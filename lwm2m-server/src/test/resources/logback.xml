@@ -13,7 +13,7 @@
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <prudent>true</prudent>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${catalina.base}/logs/Argos/argosPlatform_%d{yyyyMMdd}.log</fileNamePattern>
+            <fileNamePattern>${catalina.base}/logs/LwM2M/argosLwm2mPlatform_%d{yyyyMMdd}.log</fileNamePattern>
              <!-- 30일이 지난 파일은 삭제가 된다.-->
             <maxHistory>30</maxHistory>
         </rollingPolicy>
@@ -22,12 +22,12 @@
         </encoder>
     </appender>
     
-    <appender name="FILE-ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+    <!-- <appender name="FILE-ASYNC" class="ch.qos.logback.classic.AsyncAppender">
         <discardingThreshold>0</discardingThreshold>
         <queueSize>10000</queueSize>
         <includeCallerData>true</includeCallerData>
         <appender-ref ref="FILE" />
-    </appender>
+    </appender> -->
     
     <appender name="CONSOLE-ASYNC" class="ch.qos.logback.classic.AsyncAppender">
         <discardingThreshold>0</discardingThreshold>

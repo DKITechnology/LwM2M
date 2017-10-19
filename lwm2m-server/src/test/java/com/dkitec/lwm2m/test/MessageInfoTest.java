@@ -17,8 +17,8 @@ import com.dkitec.lwm2m.domain.message.MessageInfoVO;
 import com.dkitec.lwm2m.rdao.common.CommonRedisPoolDAO;
 import com.google.gson.Gson;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration( locations = { "/spring/root-context.xml", "/spring/appServlet/servlet-context.xml" })
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration( locations = { "/spring/root-context.xml", "/spring/appServlet/servlet-context.xml" })
 public class MessageInfoTest {
 	
 	@Test

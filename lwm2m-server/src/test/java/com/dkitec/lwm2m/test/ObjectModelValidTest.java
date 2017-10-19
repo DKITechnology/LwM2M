@@ -16,8 +16,8 @@ import com.dkitec.lwm2m.domain.ObjectModelInfoVO;
 
 import junit.framework.TestCase;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration( locations = { "/spring/root-context.xml", "/spring/appServlet/servlet-context.xml" })
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration( locations = { "/spring/root-context.xml", "/spring/appServlet/servlet-context.xml" })
 public class ObjectModelValidTest extends TestCase{
 	
 	@Autowired

@@ -14,8 +14,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @author eunJ
  *
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration( locations = { "/spring/root-context.xml", "/spring/appServlet/servlet-context.xml" })
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration( locations = { "/spring/root-context.xml", "/spring/appServlet/servlet-context.xml" })
 public class ServerConfigTest {
 	
 	@Value("#{serverConfigProp['lwm2m.server.id']}")

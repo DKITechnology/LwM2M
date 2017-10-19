@@ -26,8 +26,8 @@ import com.google.gson.Gson;
  * @author eunJ
  *
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration( locations = { "/spring/root-context.xml", "/spring/appServlet/servlet-context.xml" })
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration( locations = { "/spring/root-context.xml", "/spring/appServlet/servlet-context.xml" })
 public class DeviceInfoTest {
 
 	@Resource(name="leshanServer")

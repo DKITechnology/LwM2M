@@ -34,9 +34,9 @@ import com.google.gson.Gson;
  * @author eunJ
  *
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration( locations = { "/spring/root-context.xml", "/spring/appServlet/servlet-context.xml" })
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration( locations = { "/spring/root-context.xml", "/spring/appServlet/servlet-context.xml" })
+//@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class DeviceRequestTest {
 
 	@Resource(name="leshanServer")
