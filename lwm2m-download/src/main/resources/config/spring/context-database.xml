@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+
+	<util:properties id="databaseProps" location="classpath:config/properties/database.properties"/>
+	
+	<!-- RDB -->
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="#{databaseProps['rdb.driverClassName']}" />
+		<property name="url" value="#{databaseProps['rdb.url']}" />
+		<property name="username" value="#{databaseProps['rdb.username']}" />
+		<property name="password" value="#{databaseProps['rdb.password']}" />
+		<property name="maxTotal" value="20" />
+		<property name="maxWaitMillis" value="60000" />
+		<property name="initialSize" value="5" />
+		<property name="testOnBorrow" value="true" />
+		<property name="validationQuery" value="select 1 from dual" />
+    </bean>
+
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="classpath:config/mybatis/mybatis-config.xml"/>
+		<property name="mapperLocations" value="classpath*:config/mybatis/sql/**/*.xml"/>
+	</bean>
+	
+	<!-- mybatis mapper auto scanning -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.dkitec.download" />
+		<property name="annotationClass" value="org.springframework.stereotype.Repository" />
+	</bean>
+	
+	<!-- Transaction 설정 -->
+	<!-- 
+	<tx:annotation-driven />
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean> 
+	-->
+
+</beans>

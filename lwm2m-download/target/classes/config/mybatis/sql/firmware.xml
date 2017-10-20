@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dkitec.download.firmware.FirmwareMapper">
+
+	<!-- mappingVO -->
+	<resultMap type="com.dkitec.download.firmware.FirmwareVO" id="firmware">
+		<result property="firmwareId" column="FIWR_ID"/>
+		<result property="deviceModelCode" column="DEVC_MODL_CD"/>
+		<result property="toVersion" column="T_FIWR_VER"/>
+		<result property="fromVersion" column="F_FIWR_VER"/>
+		<result property="packageArray" column="FIWR_PKG"/>
+		<result property="packageUri" column="FIWR_PKG_URI"/>
+		<result property="statusCode" column="STAT_CD"/>
+	</resultMap>
+
+	<!-- 펌웨어 정보를 조회한다 -->
+	<select id="getFirmware" parameterType="string" resultMap="firmware">
+		select 
+			FIWR_ID, DEVC_MODL_CD, T_FIWR_VER, F_FIWR_VER, FIWR_PKG, FIWR_PKG_URI, STAT_CD
+		from
+			TBR_IOT_FIRMWARE
+		where
+			FIWR_ID = #{firmwareId}
+	</select>
+	
+</mapper>
