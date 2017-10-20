@@ -43,7 +43,7 @@ ex) TLV, JSON, TEXT
 #device.noConn.min = 단말 n분 이상 Re-regisry 정보가 없는 경우 무응답을 처리합니다.
  ```
  
- > #### LwM2M Server Test 가이드
+  #### LwM2M Server Test 가이드
  1. 위의 설정을 참고하여 서버를 구동 시킵니다. (Tomcat 7.x)
  2. `lwm2m-testcase` 를 다운로드 받습니다.
  2. 구글 크롭 앱 스토어에서 Restlet Client를 설치합니다. (https://chrome.google.com/webstore/detail/restlet-client-rest-api-t/aejoelaoggembcahagimdiliamlcdmfm)
@@ -53,9 +53,9 @@ ex) TLV, JSON, TEXT
 ArosIoT CoAP Download Server
 ------
 
-- ArosIoT CoAP Downlad Server는 오픈소스 Californium (Cf) 기반으로 생성되었습니다.
-- 운영 관리 화면에서 펌웨어 정보를 저장하면 저장된 펌웨어 패키지를 다운로드 할수 있는 기능을 제공합니다.
- 
+> ArosIoT CoAP Downlad Server는 오픈소스 Californium (Cf) 기반으로 생성되었습니다.
+> 운영 관리 화면에서 펌웨어 정보를 저장하면 저장된 펌웨어 패키지를 다운로드 할수 있는 기능을 제공합니다.
+
  
 ArosIoT Platform LwM2M Client
 ------
