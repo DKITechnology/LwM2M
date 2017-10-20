@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dkitec.lwm2m.dao.FwUpdateDao" >
+		
+	<resultMap id="fwUpdateReqDetailInfo" type="com.dkitec.lwm2m.domain.FwUpdateReqInfoVO">
+		<result property="reqId" column="REQ_ID"/>
+		<result property="reqType" column="REQ_TP"/>
+		<result property="reqDesc" column="DEVC_DESC"/>
+		<result property="infraAeId" column="INFRA_AE_ID"/>
+		<result property="userId" column="USER_ID"/>
+		<result property="fiwrId" column="FIWR_ID"/>		
+		<result property="procCd" column="PROC_CD"/>
+		<result property="reqDesc" column="REQ_DESC"/>
+		<result property="reqDatm" column="REQ_DATM"/>
+		<result property="creDatm" column="CRE_DATM"/>
+		<result property="procIngCnt" column="PROC_ING"/>
+		<result property="procComplCnt" column="PROC_COMPL"/>
+		<result property="resSucCnt" column="RES_SUC"/>
+		<result property="resFailCnt" column="RES_FAIL"/>
+		<!-- addition -->
+		<result property="devcModlCd" column="DEVC_MODL_CD"/>
+		<result property="afFiwrVer" column="T_FIWR_VER"/>
+		<result property="bfFiwrVer" column="F_FIWR_VER"/>
+		<!-- <association property="deviceIds" ></association> -->
+		<collection property="reqResults" column="{reqId=REQ_ID}" javaType="java.util.ArrayList" select="selectFwUpdateResult" ofType="com.dkitec.lwm2m.domain.FwUpdateResultVO"/>
+	</resultMap>
+	
+	<resultMap id="fwUpdateReqInfo" type="com.dkitec.lwm2m.domain.FwUpdateReqVO">
+		<result property="reqId" column="REQ_ID"/>
+		<result property="reqType" column="REQ_TP"/>
+		<result property="reqDesc" column="DEVC_DESC"/>
+		<result property="infraAeId" column="INFRA_AE_ID"/>
+		<result property="userId" column="USER_ID"/>
+		<result property="fiwrId" column="FIWR_ID"/>		
+		<result property="procCd" column="PROC_CD"/>
+		<result property="reqDesc" column="REQ_DESC"/>
+		<result property="reqDatm" column="REQ_DATM"/>
+		<result property="creDatm" column="CRE_DATM"/>
+		<!-- addition -->
+		<result property="devcModlCd" column="DEVC_MODL_CD"/>
+		<result property="afFiwrVer" column="T_FIWR_VER"/>
+		<result property="bfFiwrVer" column="F_FIWR_VER"/>
+		<result property="fiwrPkg" column="FIWR_PKG"/>
+		<result property="fiwrPkgUri" column="FIWR_PKG_URI"/>
+		<collection property="reqResults" column="{reqId=REQ_ID}" javaType="java.util.ArrayList" select="selectFwUpdateDevice" ofType="com.dkitec.lwm2m.domain.FwUpdateResultVO"/>
+	</resultMap>
+		
+	<!-- 펌웨어 목록 정보 -->
+	<resultMap id="fwUpdateReqListInfo" type="com.dkitec.lwm2m.domain.FwUpdateReqInfoVO">
+		<result property="reqId" column="REQ_ID"/>
+		<result property="reqType" column="REQ_TP"/>
+		<result property="reqDesc" column="DEVC_DESC"/>
+		<result property="infraAeId" column="INFRA_AE_ID"/>
+		<result property="userId" column="USER_ID"/>
+		<result property="fiwrId" column="FIWR_ID"/>		
+		<result property="procCd" column="PROC_CD"/>
+		<result property="reqDesc" column="REQ_DESC"/>
+		<result property="reqDatm" column="REQ_DATM"/>
+		<result property="devcModlCd" column="DEVC_MODL_CD"/>
+		<result property="afFiwrVer" column="T_FIWR_VER"/>
+		<result property="bfFiwrVer" column="F_FIWR_VER"/>
+		<result property="fiwrPkg" column="FIWR_PKG"/>
+		<result property="fiwrPkgUri" column="FIWR_PKG_URI"/>
+		<!-- count -->
+		<result property="procIngCnt" column="PROC_ING"/>
+		<result property="procComplCnt" column="PROC_COMPL"/>
+		<result property="resSucCnt" column="RES_SUC"/>
+		<result property="resFailCnt" column="RES_FAIL"/>
+	</resultMap>
+	
+	<insert id="reqFirmwareUpgradeSave" parameterType="com.dkitec.lwm2m.domain.FwUpdateVO">
+		INSERT INTO tbr_mgmt_req
+		(REQ_TP, PROC_CD, FIWR_ID, REQ_DESC, REQ_DATM)    
+		VALUES   
+		('001', '0', #{fiwrId} , #{reqDesc} ,STR_TO_DATE(#{reqDatmStr},'%Y%m%d%H%i'))
+		<selectKey resultType="String" keyProperty="reqId" order="AFTER">
+	        SELECT LAST_INSERT_ID()
+	    </selectKey>   
+	</insert>
+	
+	<update id="reqFirmwareUpgradeUpdate" parameterType="com.dkitec.lwm2m.domain.FwUpdateVO">
+		UPDATE tbr_mgmt_req set
+		REQ_DATM = STR_TO_DATE(#{reqDatmStr},'%Y%m%d%H%i')
+		WHERE REQ_ID = #{reqId}
+	</update>		
+	
+	<delete id="reqFirmwareUpgradeUpdateCancel" parameterType="String">
+		DELETE FROM tbr_mgmt_req WHERE REQ_ID = #{reqId}
+	</delete>
+	
+	<select id="selectFwUpgradeList" parameterType="com.dkitec.lwm2m.common.util.PageDateParmVO" resultMap="fwUpdateReqListInfo">	
+			SELECT req.REQ_ID, USER_ID, INFRA_AE_ID, API_SERNO, FIWR_ID, PROC_CD,
+			(select F_FIWR_VER from tbr_iot_firmware fw where fw.FIWR_ID = req.FIWR_ID) F_FIWR_VER,
+			(select T_FIWR_VER from tbr_iot_firmware fw where fw.FIWR_ID = req.FIWR_ID) T_FIWR_VER,
+			REQ_DESC, REQ_DATM, CRE_DATM,
+			PROC_ING, PROC_COMPL, RES_SUC, RES_FAIL		
+			FROM 
+			(
+			SELECT REQ_ID, USER_ID, INFRA_AE_ID, API_SERNO, FIWR_ID, PROC_CD,
+			REQ_DESC, REQ_DATM, CRE_DATM
+			FROM tbr_mgmt_req 
+			<where>
+				<if test="startDate != null and endDate != null">
+					date_format(REQ_DATM, '%Y%m%d%H%i') BETWEEN #{startDate} AND #{endDate}
+				</if>
+			</where>   
+			) req 
+			LEFT OUTER JOIN (
+				select 
+				REQ_ID,
+				count(if (PROC_CD IN ('0','1'), PROC_CD, NULL) ) AS PROC_ING,
+				count(if (PROC_CD='2', PROC_CD, NULL) ) AS PROC_COMPL,
+				count(if (RES_CD = '001', PROC_CD, NULL) ) AS RES_SUC,
+				count(if (RES_CD = '002', PROC_CD, NULL) ) AS RES_FAIL
+				from tbr_mgmt_req_device
+				group by REQ_ID
+			) rst
+			on req.REQ_ID = rst.REQ_ID
+			order by req.REQ_ID DESC
+			<if test="limit != null ">
+				limit #{limit}
+				<if test="offset != null"> offset #{offset} </if>
+			</if>
+	</select>	
+	
+	<select id="selectFwUpgradeListCnt" parameterType="com.dkitec.lwm2m.common.util.PageDateParmVO" resultType="int">
+		select count(*) from tbr_mgmt_req
+		<where>
+			<if test="startDate != null and endDate != null">
+				date_format(REQ_DATM, '%Y%m%d%H%i') BETWEEN #{startDate} AND #{endDate}
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectFwUpgradeResultDetail" resultMap="fwUpdateReqDetailInfo">
+		SELECT req.REQ_ID, USER_ID, INFRA_AE_ID, API_SERNO, req.FIWR_ID,
+		PROC_CD,
+		firm.DEVC_MODL_CD, firm.T_FIWR_VER, firm.F_FIWR_VER,
+		REQ_DESC, REQ_DATM, req.CRE_DATM,
+		PROC_ING, PROC_COMPL, RES_SUC, RES_FAIL
+		FROM
+		(
+		SELECT REQ_ID, USER_ID, INFRA_AE_ID, API_SERNO, FIWR_ID, PROC_CD,
+		REQ_DESC, REQ_DATM, CRE_DATM
+		FROM tbr_mgmt_req
+		where REQ_ID = #{reqId}
+		) req
+		LEFT OUTER JOIN (
+			select
+			REQ_ID,
+			count(if (PROC_CD IN ('0','1'), PROC_CD, NULL) ) AS PROC_ING,
+			count(if (PROC_CD='2', PROC_CD, NULL) ) AS PROC_COMPL,
+			count(if (RES_CD = '001', PROC_CD, NULL) ) AS RES_SUC,
+			count(if (RES_CD = '002', PROC_CD, NULL) ) AS RES_FAIL
+			from tbr_mgmt_req_device
+			group by REQ_ID
+		) rst
+		on req.REQ_ID = rst.REQ_ID	
+		LEFT OUTER JOIN tbr_iot_firmware firm ON req.FIWR_ID = firm.FIWR_ID
+		order by req.REQ_ID DESC
+	</select>
+	
+	<select id="selectFwUpdateResult" resultType="com.dkitec.lwm2m.domain.FwUpdateResultVO">
+		SELECT req.DEVC_ID AS deviceId, 
+		devc.DEVC_MODL_CD AS deviceModelCd,
+		devc.FIWR_ID as devcFiwrId,
+		PROC_CD AS reqProcCd, RES_CD AS reqResCd, RES_MSG AS reqResMsg,
+		req.MDF_DATM  AS mdfDatm,
+		(select dv.SERIAL_NO from tbr_iot_device dv where dv.DEVC_ID = devc.DEVC_ID) as deviceSerno
+		FROM tbr_mgmt_req_device req
+		left outer join tbr_iot_device devc
+		on req.DEVC_ID = devc.DEVC_ID
+		WHERE req.REQ_ID = #{reqId}
+	</select>
+			
+	<insert id="reqfwDevcSave" parameterType="com.dkitec.lwm2m.domain.FwUpdateVO">
+		INSERT INTO tbr_mgmt_req_device (REQ_ID, DEVC_ID, PROC_CD)
+		 values
+        <foreach collection="deviceIds" item="item" separator=" , ">
+            (#{reqId}, #{item}, '0')
+        </foreach>
+	</insert>	
+	
+	<delete id="reqfwDevicDelete" parameterType="String">
+		DELETE FROM tbr_mgmt_req_device WHERE REQ_ID = #{reqId}
+	</delete>
+	
+	<!-- 펌웨어 스케줄링 목록 정보 조회 : 60초 스케줄링 (60분전 데이터 조회)  -->
+	<select id="selectFwReqList" resultMap="fwUpdateReqInfo">
+		<![CDATA[
+			SELECT REQ_ID, USER_ID, INFRA_AE_ID, API_SERNO, req.FIWR_ID, PROC_CD, REQ_DESC, REQ_DATM, req.CRE_DATM, 
+			firm.DEVC_MODL_CD, firm.T_FIWR_VER, firm.F_FIWR_VER, firm.FIWR_PKG, firm.FIWR_PKG_URI
+			FROM tbr_mgmt_req req
+			LEFT OUTER
+			JOIN tbr_iot_firmware firm ON req.FIWR_ID = firm.FIWR_ID
+			WHERE REQ_DATM >= DATE_FORMAT(NOW() - INTERVAL 60 MINUTE,'%Y-%m-%d %H:%i') 
+			AND DATE_FORMAT(REQ_DATM,'%Y-%m-%d %H:%i') <= DATE_FORMAT(NOW(),'%Y-%m-%d %H:%i') 
+			AND PROC_CD = 0
+		]]>
+	</select>
+	
+	<select id="selectFwUpdateDevice" resultType="com.dkitec.lwm2m.domain.FwUpdateResultVO">
+		SELECT req.DEVC_ID AS deviceId, 
+		devc.DEVC_MODL_CD AS deviceModelCd,
+		devc.FIWR_ID AS devcFiwrId,
+		PROC_CD AS reqProcCd, RES_CD AS reqResCd, RES_MSG AS reqResMsg
+		FROM tbr_mgmt_req_device req
+		left outer join tbr_iot_device devc
+		on req.DEVC_ID = devc.DEVC_ID
+		WHERE REQ_ID = #{reqId}
+	</select>
+	
+	<update id="updateFwReqStat" parameterType="java.util.List">
+		UPDATE tbr_mgmt_req SET
+		PROC_CD = 1
+		WHERE REQ_ID IN
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item.reqId}
+		</foreach>
+	</update>
+	
+	<update id="updateFwClientResult" parameterType="com.dkitec.lwm2m.domain.FwUpdateResultVO">
+		UPDATE tbr_mgmt_req_device
+		<set>
+			PROC_CD = #{reqProcCd},
+			<if test="reqResCd != null "> RES_CD = #{reqResCd}, </if>
+			<if test="reqResMsg != null"> RES_MSG = #{reqResMsg}, </if>	
+			MDF_DATM = now()
+		</set>
+		WHERE REQ_ID = #{deviceReqId} AND DEVC_ID = #{deviceId}
+	</update>
+	
+	<update id="updateFwClientFailResult" parameterType="java.util.List">
+		UPDATE tbr_mgmt_req_device SET
+			PROC_CD = "2",
+			RES_CD = "002",
+			RES_MSG = "Invalid Device.",
+			MDF_DATM = now()
+		WHERE DEVC_ID IN
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item.deviceId}
+		</foreach>
+	</update>
+	
+	<select id="selectFwInfo" parameterType="String" resultType="com.dkitec.lwm2m.domain.FwUpdateReqVO">
+		select firm.DEVC_MODL_CD as devcModlCd, firm.T_FIWR_VER as afFiwrVer,
+		firm.F_FIWR_VER as bfFiwrVer, firm.FIWR_PKG as fiwrPkg,
+		firm.FIWR_PKG_URI as fiwrPkgUri
+		FROM tbr_iot_firmware firm
+		where firm.FIWR_ID = #{firmwrId}
+	</select>
+	
+	<select id="selectFwPkgs" parameterType="int" resultType="com.dkitec.lwm2m.domain.FwUpdateReqVO">
+		select firm.FIWR_ID as fiwrId, firm.DEVC_MODL_CD as devcModlCd, firm.T_FIWR_VER as afFiwrVer,
+		firm.F_FIWR_VER as bfFiwrVer, firm.FIWR_PKG as fiwrPkg,
+		firm.FIWR_PKG_URI as fiwrPkgUri
+		FROM tbr_iot_firmware firm
+		order by CRE_DATM desc
+		limit #{pkgLimitCnt}
+	</select>
+</mapper>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dkitec.lwm2m.dao.DeviceInfoDao" >
+		
+	<resultMap id="deviceInfo" type="com.dkitec.lwm2m.domain.DeviceInfoVO">
+		<result property="devcId" column="DEVC_ID"/>
+		<result property="devcNm" column="DEVC_NM"/>
+		<result property="devcDesc" column="DEVC_DESC"/>
+		<result property="devcModlNm" column="DEVC_MODL_NM"/>
+		<result property="devcModlCd" column="DEVC_MODL_CD"/>
+		<result property="serialNo" column="SERIAL_NO"/>
+		<result property="ipAddr" column="IP_V4_ADDR"/>
+		<result property="attcType" column="ATTC_TYPE"/>
+		<result property="attcPw" column="ATTC_PW"/>
+		<result property="devcTypeCd" column="DEVC_STAT_CD"/>
+		<result property="devcTypeCdStr" column="DEVC_TYPE_STR"/>
+		<result property="fiwrId" column="FIWR_ID"/>
+		<result property="gwDevcId" column="GW_DEVC_ID"/>
+		<result property="devcStatcd" column="DEVC_STAT_CD"/>
+		<result property="lastConnDatm" column="LAST_CONN_DATM"/>
+	</resultMap>	
+	
+	<select id="selectDeviceList" parameterType="com.dkitec.lwm2m.domain.DeviceInfoVO" resultMap="deviceInfo">
+		SELECT 
+		DEVC_ID, DEVC.DEVC_NM, DEVC.DEVC_MODL_CD, MODEL.DEVC_MODL_NM, MODEL.DEVC_TYPE_CD, FIWR_ID,
+		(SELECT CD_NM
+		FROM Tbr_com_code
+		WHERE CD_GRP_ID = "001" AND CD_ID = MODEL.DEVC_TYPE_CD) AS DEVC_TYPE_CD_STR,
+		SERIAL_NO, DEVC_NM, DEVC_DESC, ATTC_TYPE, ATTC_PW, DEVC_STAT_CD
+		FROM tbr_iot_device DEVC
+		LEFT OUTER
+		JOIN tbd_iot_device_modl_cd MODEL ON DEVC.DEVC_MODL_CD = MODEL.DEVC_MODL_CD
+		<where>
+			<if test="devcModlCd != null">
+				DEVC.DEVC_MODL_CD like CONCAT ("%",#{devcModlCd},"%") 
+			</if>
+		</where>
+		limit #{limit} offset #{offset}
+	</select>
+	
+	<select id="selecDeviceTotalCnt" parameterType="com.dkitec.lwm2m.domain.DeviceInfoVO" resultType="int">
+		SELECT count(*) from tbr_iot_device
+		<where>
+			<if test="devcModlCd != null">
+				DEVC.DEVC_MODL_CD like CONCAT ("%",#{devcModlCd},"%") 
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectDeviceDetail" parameterType="String" resultMap="deviceInfo">
+		SELECT 
+		DEVC_ID, DEVC.DEVC_NM, DEVC.DEVC_MODL_CD, MODEL.DEVC_MODL_NM, MODEL.DEVC_TYPE_CD, FIWR_ID,
+		(SELECT CD_NM
+		FROM Tbr_com_code
+		WHERE CD_GRP_ID = "001" AND CD_ID = MODEL.DEVC_TYPE_CD) AS DEVC_TYPE_CD_STR,
+		SERIAL_NO, DEVC_NM, DEVC_DESC, ATTC_TYPE, ATTC_PW, DEVC_STAT_CD
+		FROM tbr_iot_device DEVC
+		LEFT OUTER
+		JOIN tbd_iot_device_modl_cd MODEL ON DEVC.DEVC_MODL_CD = MODEL.DEVC_MODL_CD
+		where DEVC_ID = #{devcId}
+	</select>
+	
+	<update id="updateDeviceInfo" parameterType="com.dkitec.lwm2m.domain.DeviceInfoVO">
+		UPDATE tbr_iot_device set		
+		IP_V4_ADDR = #{ipAddr},
+		DEVC_STAT_CD = 1,
+		LAST_CONN_DATM = NOW()
+		WHERE DEVC_ID = #{devcId}
+	</update>
+	
+	<insert id="upsertDeviceInfoPort" parameterType="com.dkitec.lwm2m.domain.DeviceInfoVO">
+		INSERT INTO tbr_iot_device_prop
+		(DEVC_ID, DEVC_PROP_NM, DEVC_PROP_VALUE, CRE_DATM)
+		VALUES
+		(#{devcId}, 'PORT', #{devcPort}, NOW()) 
+		ON DUPLICATE KEY UPDATE
+		DEVC_PROP_VALUE = #{devcPort}
+	</insert>
+	
+	<insert id="upsertDeviceInfoSvId" parameterType="com.dkitec.lwm2m.domain.DeviceInfoVO">
+		INSERT INTO tbr_iot_device_prop
+		(DEVC_ID, DEVC_PROP_NM, DEVC_PROP_VALUE, CRE_DATM)
+		VALUES
+		(#{devcId}, 'SERVERID', #{devcServId}, NOW()) 
+		ON DUPLICATE KEY UPDATE
+		DEVC_PROP_VALUE = #{devcServId}
+	</insert>
+	
+	<update id="updateDeviceStatusCon" parameterType="String">
+		UPDATE tbr_iot_device SET 
+			DEVC_STAT_CD = 1,
+			LAST_CONN_DATM = now()
+		WHERE DEVC_ID = #{devcId}
+	</update>
+	
+	<update id="updateDeviceStatusDisCon" parameterType="String">
+		UPDATE tbr_iot_device SET 
+			DEVC_STAT_CD = 0,
+			LAST_CONN_DATM = now()
+		WHERE DEVC_ID = #{devcId}
+	</update>
+	
+	<update id="updateDeviceSecurity" parameterType="com.dkitec.lwm2m.domain.SecurityDataInfo">
+		UPDATE tbr_iot_device SET 
+		ATTC_TYPE = #{securityType},
+		ATTC_PW = #{key}
+		WHERE DEVC_ID = #{deviceId}
+	</update>
+	
+	<update id="updateNoConDeviceStatus" parameterType="int">
+		<![CDATA[
+			Update tbr_iot_device set
+			DEVC_STAT_CD = '0'
+			where DATE_FORMAT(LAST_CONN_DATM,'%Y-%m-%d %H:%i') <= DATE_FORMAT(NOW() -
+				  INTERVAL #{minutes} MINUTE,'%Y-%m-%d %H:%i')
+			AND DEVC_STAT_CD = '1'
+		]]>
+	</update>
+</mapper>
