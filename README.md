@@ -54,8 +54,9 @@ ArosIoT CoAP Download Server
 ------
 
 > ArosIoT CoAP Downlad Server는 오픈소스 Californium (Cf) 기반으로 생성되었습니다.
-> 운영 관리 화면에서 펌웨어 정보를 저장하면 저장된 펌웨어 패키지를 CoAP 프로토콜을 통해 다운로드 할수 있는 기능을 제공합니다.
-
+>
+> DB에 저장된 펌웨어 조회 기능을 제공합니다.
+> 저장된 펌웨어 정보는 `CoAP 프로토콜`을 통해 다운로드 할 수 있습니다.
  
 ArosIoT Platform LwM2M Client
 ------
