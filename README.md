@@ -7,7 +7,7 @@ OMA에서 정의하는 최신 펌웨어 관리 및 업데이트 프로토콜을 
  	* OMA LwM2M 프로토콜 지원 
  	* LwM2M 규격을 준수하는 펌웨어 업데이트 서비스 제공
  	* 동시 접속 수용을 위한 대용량 처리 모듈 제공
- 	* Obesssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssct, Resource의 Read,Write,Excute 등 operation 기능 지원
+ 	* Obejct, Resource의 Read,Write,Excute 등 operation 기능 지원
  	* CoAP 프로토콜을 통한 펌웨어 패키지 다운로드
  	* Diff Package를 통한 IoT 단말 펌웨어 업데이트 기능 탑재
  	
