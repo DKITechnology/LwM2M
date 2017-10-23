@@ -7,7 +7,7 @@ OMA에서 정의하는 최신 펌웨어 관리 및 업데이트 프로토콜을 
  	* OMA LwM2M 프로토콜 지원 
  	* LwM2M 규격을 준수하는 펌웨어 업데이트 서비스 제공
  	* 동시 접속 수용을 위한 대용량 처리 모듈 제공
- 	* Obect, Resource의 Read,Write,Excute 등 operation 기능 지원
+ 	* Obesssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssct, Resource의 Read,Write,Excute 등 operation 기능 지원
  	* CoAP 프로토콜을 통한 펌웨어 패키지 다운로드
  	* Diff Package를 통한 IoT 단말 펌웨어 업데이트 기능 탑재
  	
@@ -60,6 +60,7 @@ ex) TLV, JSON, TEXT
  4. 구동시킨 서버 URI로 해당 어플리케이션을 실행합니다.
  ```
 <br/> 
+
 #### ArosIoT CoAP Download Server
 ------
 
@@ -68,6 +69,7 @@ ex) TLV, JSON, TEXT
 > ArosIoT CoAP Download Server는 저장된 펌웨어 정보를 관리합니다. `CoAP` 프로토콜을 통해 펌웨어 다운로드 요청을 수신 받으면 저장된 펌웨어 패키지 정보를 조회 하며 `CoAP` 프로토콜을 통해 펌웨어 파일을 전달하는 기능을 제공합니다.
 
 <br/> 
+
 #### ArosIoT Platform LwM2M Client
 ------
 
